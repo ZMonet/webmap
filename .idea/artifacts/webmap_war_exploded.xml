@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="webmap:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/webmap_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="webmap/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="webmap" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Struts 2-2.5.14.1" />
+          <element id="library" level="project" name="Spring-4.3.18.RELEASE" />
+          <element id="library" level="project" name="Hibernate 5.3.2-5.3.2" />
+          <element id="library" level="project" name="commons-beanutils-1.9.2" />
+          <element id="library" level="project" name="struts2-json-plugin-2.5.14" />
+          <element id="library" level="project" name="c3p0-0.9.5" />
+          <element id="library" level="project" name="aspectjweaver-1.8.7" />
+          <element id="library" level="project" name="mchange-commons-java-0.2.15" />
+          <element id="library" level="project" name="commons-lang-2.5" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

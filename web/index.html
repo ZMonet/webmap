@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet/index.css">
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <title>无人机路线规划</title>
+</head>
+<body>
+<!--地图容器-->
+<div id="container" tabindex="0"></div>
+
+<div id="tip"></div>
+
+<div class="control-container">
+
+    <div class="figure-draw">
+        <input type="button" class="draw-button" value="绘制线" id="polyline"/>
+        <input type="button" class="draw-button" value="绘制矩形" id="rectangle"/>
+        <input type="button" class="draw-button" value="绘制多边形" id="polygon"/>
+        <input type="button" class="draw-button" value="已保存图形" id="redraw"/>
+    </div>
+
+    <div class="figure-draw-control">
+        <input type="button" class="draw-control-button" value="编辑图形" id="startEdit"/>
+        <input type="button" class="draw-control-button" value="结束编辑" id="endEdit"/>
+        <input type="button" class="draw-control-button" value="保存图形" id="save"/>
+        <input type="button" class="draw-control-button" value="删除图形" id="delete"/>
+    </div>
+
+</div>
+
+<div class="figure-box flex-container-column flex-container-center-V-H">
+    <div class="figure-box-collection figure-box-collection-hidden flex-container-column flex-container-center-V-H">
+        <!--<div class="figure-box-item figure-box-collection-item figure-box-collection-item-active flex-container-column flex-container-center-V-H">Point</div>-->
+    </div>
+    <div class="figure-box-item figure-box-num flex-container-row flex-container-center-V-H">0</div>
+
+</div>
+
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=5a200dbe618c676e58e12ac9e0107694&plugin=AMap.MouseTool,AMap.PolyEditor"></script>
+<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+<script src="javaScript/index.js"></script>
+<script src="javaScript/redraw.js"></script>
+</body>
+</html>

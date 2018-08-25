@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="struts2-json-plugin-2.5.14">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/struts2-json-plugin-2.5.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/struts2-spring-plugin-2.5.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/spring-web-4.1.9.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-8.0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json-lib-2.4-jdk15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ezmorph-1.0.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-pool2-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-dbcp2-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections-3.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
