@@ -1,3 +1,4 @@
+//加载地图
 var map = new AMap.Map('container', {
     resizeEnable: true,
     zoom: 10  //级别
@@ -36,6 +37,7 @@ function onError() {
     document.getElementById('tip').innerHTML = '定位失败';
 }
 
+
 //绘制图形
 var mouseTool = new AMap.MouseTool(map);
 var currentType = '';
@@ -43,8 +45,11 @@ var elements = document.getElementsByClassName("draw-button");
 for (var element of elements) {
     element.onclick = function (e) {
         currentType = e.target.id;
-        switch (e.target.id) {
+        switch (currentType) {
             case "polyline":
+                polyline.style.background = '#2782ff';
+                rectangle.style.background = '#3771a2';
+                polygon.style.background = '#3771a2';
                 mouseTool.polyline({
                     strokeColor: "#2782ff", //线颜色
                     strokeOpacity: 1,       //线透明度
@@ -54,6 +59,9 @@ for (var element of elements) {
                 });
                 break;
             case "rectangle":
+                polyline.style.background = '#3771a2';
+                rectangle.style.background = '#2782ff';
+                polygon.style.background = '#3771a2';
                 mouseTool.rectangle({
                     map: map,
                     strokeColor: '#FFC135',  //线颜色
@@ -66,6 +74,9 @@ for (var element of elements) {
                 });
                 break;
             case "polygon":
+                polyline.style.background = '#3771a2';
+                rectangle.style.background = '#3771a2';
+                polygon.style.background = '#2782ff';
                 mouseTool.polygon({
                     fillColor: '#53ecff', // 多边形填充颜色
                     fillOpacity: 0.8,//多边形填充透明度
@@ -81,97 +92,66 @@ for (var element of elements) {
 }
 
 
-//   //编辑图形
-//
-//    var polylineEditor =new AMap.PolyEditor(map,polyline);
-// AMap.event.addDomListener(document.getElementById('startEdit'), 'click', function() {
-//    polylineEditor.open();
-// });
-//
-//
-// //结束编辑
-//
-// AMap.event.addDomListener(document.getElementById('endEdit'),'click',function () {
-//     polylineEditor.close();
-// })
-
-
-
 //获取图形的坐标
-var polylineSet = [];    //所有线的点集
-var polylineCount = 0;  //线的个数
-var rectangleSet = [];    //所有矩形的点集
-var rectangleCount = 0;  //矩形的个数
-var polygonSet = [];    //所有多边形的点集
-var polygonCount = 0;  //多边形的个数
+var pType = [];    //图形类型
+var pCount=0;     //图形个数
+var pSet=[];      //图形坐标集
 
 AMap.event.addListener(mouseTool, 'draw', function (e) {
-    var path = e.obj.getPath();    //获取坐标
-    path.forEach(function (item) {
-        delete item.O;
-        delete item.M;
-    })
-    if (currentType == "polyline") {
-        polylineSet[polylineCount] = path;   //把每条线的点集存到一个数组里
-        console.log(polylineSet);
-        polylineCount++;
+    var path = e.obj.getPath();    //获取图形坐标
+    if (path.length <= 1) {    //如果画矩形时只画了一个点，那么把这个点删除
+        var overlaysList = map.getAllOverlays();
+        map.remove(overlaysList[pCount]);
     }
-    else if (currentType == "rectangle") {
-        rectangleSet[rectangleCount] = path;   //把每个矩形的点集存到一个数组
-        console.log(rectangleSet);
-        rectangleCount++;
-    }
-    else if(currentType=="polygon"){
-        polygonSet[polygonCount] = path;   //把每个多边形的点集存到一个数组里
-        console.log(polygonSet);
-        polygonCount++;
+    else {
+        path.forEach(function (item) {
+            delete item.O;
+            delete item.M;     //删除O,M坐标，只保留经纬度
+        })
+
+        document.getElementById("messageInfo").style.display="block";  //打开选择信息窗口
+        pType[pCount] = currentType;
+        pSet[pCount] = path;   //把每个图形的坐标集存到一个数组里
+        console.log(pType);
+        console.log(pSet);
+        pCount++;
     }
 });
 
-
-//删除
-AMap.event.addDomListener(document.getElementById('delete'), 'click', function () {
-    if(currentType=="polyline"){
-        var overlaysLsit=map.getAllOverlays("polyline");
-        var length = overlaysList.length;
-        map.remove(overlaysList[length - 1]);
-    }
-
-
-    var overlaysList = map.getAllOverlays();
-    var length = overlaysList.length;
-    map.remove(overlaysList[length - 1]);
+//保存从信息窗口获取的信息（飞行方式）
+var messageInfo=[];
+AMap.event.addDomListener(document.getElementById('saveMessageInfo'), 'click', function() {
+    var options=$("#messageInfo option:selected").text();
+    messageInfo[pCount-1]=options;
+    console.log(messageInfo);
+    document.getElementById("messageInfo").style.display="none";
 }, false);
 
-
 //保存图形到数据库
-AMap.event.addDomListener(document.getElementById("save"),'click',function () {
+AMap.event.addDomListener(document.getElementById("save"), 'click', function () {
     $.ajax({
-        type : 'POST',
-        url :"saveAction.action",
-        data: {
-            "lpath":JSON.stringify(polylineSet),
-            "rpath":JSON.stringify(rectangleSet),
-            "gpath":JSON.stringify(polygonSet),
+        type: 'POST',
+        url: "saveAction.action",
+        data:{
+            "type":JSON.stringify(pType),
+            "location":JSON.stringify(pSet)
         },
-        dataType:'json',
-        success:function(data) {
+        dataType: 'json',
+        success: function (data) {
             alert("success");
         },
-        error:function (){
+        error: function () {
             alert("error");
         }
     });
 
     //将已保存到数据库的图形清空，以防多次保存
-    polylineSet=[];
-    polylineCount=0;
-    rectangleSet=[];
-    rectangleCount=0;
-    polygonSet=[];
-    polygonCount=0;
+    pType = [];
+    pCount=0;
+    pSet=[];
 
-},false);
+
+}, false);
 
 
 

@@ -1,4 +1,43 @@
 
+//   //编辑图形
+//
+//    var polylineEditor =new AMap.PolyEditor(map,polyline);
+// AMap.event.addDomListener(document.getElementById('startEdit'), 'click', function() {
+//    polylineEditor.open();
+// });
+//
+//
+// //结束编辑
+//
+// AMap.event.addDomListener(document.getElementById('endEdit'),'click',function () {
+//     polylineEditor.close();
+// })
+
+
+//移除
+AMap.event.addDomListener(document.getElementById('delete'), 'click', function () {
+    var overlaysList = map.getAllOverlays();
+    console.log(pCount);
+    if(pCount>0){
+        map.remove(overlaysList[pCount - 1]);
+        pSet.splice(pCount-1);
+        pType.splice(pCount-1);
+        messageInfo.splice(pCount-1);
+        pCount--;
+        console.log(pSet);
+        console.log(pType);
+        console.log(messageInfo);
+    }
+    else {
+        alert("没有可移除的图形")
+    }
+
+}, false);
+
+
+
+
+
 //查看已保存的图形
 var TypeAndPaths=[];
 AMap.event.addDomListener(document.getElementById('redraw'), 'click', function() {
@@ -15,7 +54,6 @@ AMap.event.addDomListener(document.getElementById('redraw'), 'click', function()
                 TypeAndPaths = obj.allpath.split(";");
                 for(var m in TypeAndPaths){
                     if("polygon" == TypeAndPaths[m].substring(0,7)){
-                        alert(TypeAndPaths[m]);
                         var jobj = JSON.parse(TypeAndPaths[m].substring(8,TypeAndPaths[m].length));
                         var arr = [];
                         for(var k in jobj){
@@ -30,7 +68,6 @@ AMap.event.addDomListener(document.getElementById('redraw'), 'click', function()
                         map.add(polygon);
                     }
                     else if("polyline" == TypeAndPaths[m].substring(0,8)){
-                        alert(TypeAndPaths[m]);
                         var jobj = JSON.parse(TypeAndPaths[m].substring(9,TypeAndPaths[m].length));
                         var arr = [];
                         for(var k in jobj){
@@ -38,30 +75,29 @@ AMap.event.addDomListener(document.getElementById('redraw'), 'click', function()
                         }
                         var polyline = new AMap.Polyline({
                             path: arr,        //设置线覆盖物路径
-                            borderWeight: 2, // 线条宽度，默认为 1
-                            strokeColor: '#42a0ff', // 线条颜色
+                            borderWeight: 3, // 线条宽度，默认为 1
+                            strokeColor: '#0c21ff', // 线条颜色
                             lineJoin: 'round' // 折线拐点连接处样式
                         });
                         map.add(polyline);
                     }
                     else if("rectangle"==TypeAndPaths[m].substring(0,9)){
-                        alert(TypeAndPaths[m]);
                         var jobj = JSON.parse(TypeAndPaths[m].substring(10,TypeAndPaths[m].length));
-                        var arr = [];
+                        var arr=[];
                         for(var k in jobj){
                             arr.push([jobj[k].lng,jobj[k].lat]);
                         }
-                        var rectangle = new AMap.Rectangle({
-                            path: arr,        //设置线覆盖物路径
-                            strokeColor: '#FFC135',  //线颜色
+                        var polygon = new AMap.Polygon({
+                            path:arr,   //覆盖物路径
+                            strokeColor: '#d974ff',  //线颜色
                             strokeWeight: 3,      //线宽
                             strokeOpacity: 1,     //线透明度
                             strokeDasharray: [30, 10],   //补充线样式
                             strokeStyle: 'solid',  //线样式
-                            fillColor: '#ffef50',     //填充颜色
+                            fillColor: '#eca9ff',     //填充颜色
                             fillOpacity: 0.5,     //填充透明度
                         });
-                        map.add(rectangle);
+                        map.add(polygon);
                     }
                 }
             }else{

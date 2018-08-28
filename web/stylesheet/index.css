@@ -31,6 +31,39 @@
     -webkit-border-radius: 25px;
 }
 
+/*信息窗体*/
+#messageInfo{
+    display: none;
+    position: absolute;
+    left:50%;
+    top:50%;
+    width:200px;
+    height:100px;
+    background-color: #c0ffec;
+    text-align: center;
+    -webkit-border-radius: 10px;
+}
+
+#messageSelect{
+    width:100px;
+    height:30px;
+    font-size:16px;
+    font-family:Microsoft YaHei;
+    color: rgba(0, 0, 0, 0.98);
+    -webkit-border-radius: 5px;
+}
+
+.submit-button{
+    position: absolute;
+    top:50%;
+    left: 30%;
+    width:80px;
+    height:30px;
+    background-color: #35aeff;
+    text-align: center;
+    -webkit-border-radius: 15px;
+}
+
 /*figure-box*/
 .flex-container-column{
     display: flex;

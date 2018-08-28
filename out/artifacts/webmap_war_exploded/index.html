@@ -31,6 +31,20 @@
 
 </div>
 
+<div id="messageInfo">
+    <table>
+        飞行方式：
+        <select id="messageSelect">
+            <option value="stripe">条带</option>
+            <option value="surround">环绕</option>
+            <option value="incline">倾斜</option>
+            <option value="panorama">全景</option>
+        </select>
+        <br>
+        <input type="button" class="submit-button" value="确定" id="saveMessageInfo"/>
+    </table>
+</div>
+
 <div class="figure-box flex-container-column flex-container-center-V-H">
     <div class="figure-box-collection figure-box-collection-hidden flex-container-column flex-container-center-V-H">
         <!--<div class="figure-box-item figure-box-collection-item figure-box-collection-item-active flex-container-column flex-container-center-V-H">Point</div>-->
@@ -42,6 +56,6 @@
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=5a200dbe618c676e58e12ac9e0107694&plugin=AMap.MouseTool,AMap.PolyEditor"></script>
 <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script src="javaScript/index.js"></script>
-<script src="javaScript/redraw.js"></script>
+<script src="javaScript/control.js"></script>
 </body>
 </html>
