@@ -2,49 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheet/lib/ol.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet/common.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/index.css">
-    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-    <title>无人机路线规划</title>
+    <script type="text/javascript" src="scripts/lib/ol.js"></script>
+    <script type="text/javascript" src="scripts/lib/prefixfree.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/config/config.js"></script>
+    <title>OpenLayers example</title>
 </head>
 <body>
-<!--地图容器-->
-<div id="container" tabindex="0"></div>
 
-<div id="tip"></div>
+<!--navbar-->
+<div class="topbar flex-container-row">
+    <div class="flex-container-row flex-container-center-H top-bar-logo">航线规划</div>
+    <!--<div class="flex-container-row flex-container-center-H top-bar-items"></div>-->
+    <!--<div class="flex-container-row flex-container-center-H top-bar-menu"></div>-->
+</div>
 
-<div class="control-container">
+<!--信息展示-->
+<!--<div class="figure-info flex-container-column flex-auto">-->
+    <!--<div class="figure-info-items flex-container-column">-->
+        <!--<div class="figure-info-item flex-container-row flex-container-center-H figure-info-Id">ID:null - null</div>-->
+        <!--<p class="figure-info-item flex-container-column flex-auto flex-wrap figure-info-Coordinates">null</p>-->
+    <!--</div>-->
+<!--</div>-->
 
-    <div class="figure-draw">
-        <input type="button" class="draw-button" value="绘制线" id="polyline"/>
-        <input type="button" class="draw-button" value="绘制矩形" id="rectangle"/>
-        <input type="button" class="draw-button" value="绘制多边形" id="polygon"/>
-        <input type="button" class="draw-button" value="已保存图形" id="redraw"/>
+
+<!--controls-->
+<div class="controls-container flex-container-row">
+
+    <div class="map-switcher flex-container-row flex-container-center-V-H flex-auto">
+        <div class="switcher-item flex-item switcher-item-active">百度地图</div>
+        <div class="switcher-item flex-item">天地图</div>
+        <div class="switcher-item flex-item">高德地图</div>
     </div>
 
-    <div class="figure-draw-control">
-        <input type="button" class="draw-control-button" value="编辑图形" id="startEdit"/>
-        <input type="button" class="draw-control-button" value="结束编辑" id="endEdit"/>
-        <input type="button" class="draw-control-button" value="保存图形" id="save"/>
-        <input type="button" class="draw-control-button" value="删除图形" id="delete"/>
+    <div class="figure-draw flex-container-row flex-container-center-V-H flex-auto">
+        <!--<div class="draw-item flex-container-row flex-container-center-V-H" data-draw-type = 'Point'>点</div>-->
+        <!--<div class="draw-item flex-container-row flex-container-center-V-H" data-draw-type = 'Circle'>圆形</div>-->
+        <div class="draw-item flex-container-row flex-container-center-V-H" data-draw-type = 'LineString'>折线</div>
+        <div class="draw-item flex-container-row flex-container-center-V-H" data-draw-type = 'Square'>正方形</div>
+        <div class="draw-item flex-container-row flex-container-center-V-H" data-draw-type = 'Box'>长方形</div>
+        <div class="draw-item flex-container-row flex-container-center-V-H" data-draw-type = 'Polygon'>多边形</div>
+    </div>
+
+    <div class="figure-draw-control flex-container-row flex-container-center-V-H flex-auto">
+        <div class="draw-control-item flex-container-row flex-container-center-V-H draw-close">结束绘制</div>
+        <div class="draw-control-item flex-container-row flex-container-center-V-H draw-close">开启编辑</div>
+        <div class="draw-control-item flex-container-row flex-container-center-V-H draw-close">移除图形</div>
+        <div class="redraw-item flex-container-row flex-container-center-V-H ">已保存图形</div>
     </div>
 
 </div>
 
-<div id="messageInfo">
-    <table>
-        飞行方式：
-        <select id="messageSelect">
-            <option value="stripe">条带</option>
-            <option value="surround">环绕</option>
-            <option value="incline">倾斜</option>
-            <option value="panorama">全景</option>
-        </select>
-        <br>
-        <input type="button" class="submit-button" value="确定" id="saveMessageInfo"/>
-    </table>
-</div>
-
+<!--box-->
 <div class="figure-box flex-container-column flex-container-center-V-H">
     <div class="figure-box-collection figure-box-collection-hidden flex-container-column flex-container-center-V-H">
         <!--<div class="figure-box-item figure-box-collection-item figure-box-collection-item-active flex-container-column flex-container-center-V-H">Point</div>-->
@@ -53,9 +65,13 @@
 
 </div>
 
-<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=5a200dbe618c676e58e12ac9e0107694&plugin=AMap.MouseTool,AMap.PolyEditor"></script>
-<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
-<script src="javaScript/index.js"></script>
-<script src="javaScript/control.js"></script>
+<!--地图容器-->
+<div id="map" class="map"></div>
+
+<script type="text/javascript" src="scripts/util/projzh.js"></script>
+<script type="text/javascript" src="scripts/logicalControls/figureControl.js"></script>
+<script type="text/javascript" src="scripts/logicalControls/mainControl.js"></script>
+<script type="text/javascript" src="scripts/pageControls/indexControl.js"></script>
+
 </body>
 </html>

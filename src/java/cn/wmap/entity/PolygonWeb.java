@@ -2,24 +2,25 @@ package cn.wmap.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "polygon_web", schema = "webmap", catalog = "")
 public class PolygonWeb {
-    private int id;
+    private int pid;
     private String name;
     private String location;
     private Timestamp time;
     private Integer updatetype;
 
     @Id
-    @Column(name = "_id")
-    public int getId() {
-        return id;
+    @Column(name = "pid")
+    public int getPid() {
+        return pid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     @Basic
@@ -66,25 +67,16 @@ public class PolygonWeb {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         PolygonWeb that = (PolygonWeb) o;
-
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
-        if (time != null ? !time.equals(that.time) : that.time != null) return false;
-        if (updatetype != null ? !updatetype.equals(that.updatetype) : that.updatetype != null) return false;
-
-        return true;
+        return pid == that.pid &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(location, that.location) &&
+                Objects.equals(time, that.time) &&
+                Objects.equals(updatetype, that.updatetype);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (updatetype != null ? updatetype.hashCode() : 0);
-        return result;
+        return Objects.hash(pid, name, location, time, updatetype);
     }
 }

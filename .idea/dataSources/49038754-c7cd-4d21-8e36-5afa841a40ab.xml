@@ -1029,7 +1029,7 @@
       <ColNames>_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="259" parent="243" name="_id">
+    <column id="259" parent="243" name="pid">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1058,7 +1058,7 @@
     </column>
     <key id="264" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>_id</ColNames>
+      <ColNames>pid</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>

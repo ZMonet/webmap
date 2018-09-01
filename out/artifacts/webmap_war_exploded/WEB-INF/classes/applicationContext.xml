@@ -46,6 +46,18 @@
         <property name="dataSource" ref="dataSource"/>
         <!--指定Hibernate核心配置文件-->
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:cn/wmap/entity/PolygonWeb.hbm.xml</value>
+                <value>classpath:cn/wmap/entity/PolygonWeb.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.connection.url">jdbc:mysql://47.94.192.152:3306/webmap</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
     </bean>
 
     <!-- 配置事务管理器 -->

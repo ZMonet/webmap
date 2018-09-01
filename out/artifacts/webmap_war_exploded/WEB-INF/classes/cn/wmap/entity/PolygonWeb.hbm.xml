@@ -5,7 +5,7 @@
 <hibernate-mapping>
 
     <class name="cn.wmap.entity.PolygonWeb" table="polygon_web" schema="webmap">
-        <id name="id" column="_id"/>
+        <id name="pid" column="pid"/>
         <property name="name" column="name"/>
         <property name="location" column="location"/>
         <property name="time" column="time"/>
