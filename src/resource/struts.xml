@@ -27,14 +27,14 @@
 
     <package name="cn" namespace="/" extends="struts-default,json-default">
 
-        <action name="saveAction" class="saveAction" method="save">
+        <action name="saveAction" class="cn.wmap.action.SaveAction" method="save">
             <!-- 返回类型为json-->
             <result type="json">
                 <param name="root">result</param>
             </result>
         </action>
 
-        <action name="redrawAction" class="redrawAction" method="redraw">
+        <action name="redrawAction" class="cn.wmap.action.RedrawAction" method="redraw">
             <!-- 返回类型为json-->
             <result type="json">
                 <param name="root">result</param>

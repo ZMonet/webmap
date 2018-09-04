@@ -17,6 +17,9 @@
           <element id="library" level="project" name="aspectjweaver-1.8.7" />
           <element id="library" level="project" name="mchange-commons-java-0.2.15" />
           <element id="library" level="project" name="commons-lang-2.5" />
+          <element id="library" level="project" name="jsr250-api-1.0" />
+          <element id="library" level="project" name="bcprov-jdk16-1.46" />
+          <element id="library" level="project" name="fastjson-1.2.49" />
         </element>
       </element>
     </root>

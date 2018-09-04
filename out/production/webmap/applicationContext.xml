@@ -9,6 +9,10 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- 开启Spring的Annotation注解处理器 -->
+    <context:annotation-config/>
+    <!-- 开启Spring的Bean自动扫描机制来查找与管理Bean实例 -->
+    <context:component-scan base-package="cn"/>
     <!-- data connection -->
     <context:property-placeholder location="classpath:jdbc.properties" />
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
@@ -46,18 +50,6 @@
         <property name="dataSource" ref="dataSource"/>
         <!--指定Hibernate核心配置文件-->
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
-        <property name="mappingLocations">
-            <list>
-                <value>classpath:cn/wmap/entity/PolygonWeb.hbm.xml</value>
-                <value>classpath:cn/wmap/entity/PolygonWeb.hbm.xml</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.connection.url">jdbc:mysql://47.94.192.152:3306/webmap</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
-            </props>
-        </property>
     </bean>
 
     <!-- 配置事务管理器 -->
@@ -67,23 +59,21 @@
     <!-- 开启事务注解 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <!-- 配置hibernateTemplate -->
-    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-
-
-    <!--注解-->
-    <bean id="redrawAction" class="cn.wmap.action.RedrawAction" scope="prototype">
-        <property name="polygonService" ref="polygonService"></property>
-    </bean>
-    <bean id="saveAction" class="cn.wmap.action.SaveAction" scope="prototype">
-        <property name="polygonService" ref="polygonService"></property>
-    </bean>
-    <bean id="polygonService" class="cn.wmap.service.PolygonService">
-        <property name="polygonDao" ref="polygonDao"></property>
-    </bean>
-    <bean id="polygonDao" class="cn.wmap.dao.PolygonDao">
-        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
-    </bean>
+    <!--&lt;!&ndash; 配置hibernateTemplate &ndash;&gt;-->
+    <!--<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"></property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;注解&ndash;&gt;-->
+    <!--<bean id="redrawAction" class="cn.wmap.action.RedrawAction" scope="prototype">-->
+        <!--<property name="polygonService" ref="polygonService"></property>-->
+    <!--</bean>-->
+    <!--<bean id="saveAction" class="cn.wmap.action.SaveAction" scope="prototype">-->
+        <!--<property name="polygonService" ref="polygonService"></property>-->
+    <!--</bean>-->
+    <!--<bean id="polygonService" class="cn.wmap.service.PolygonService">-->
+        <!--<property name="polygonDao" ref="polygonDao"></property>-->
+    <!--</bean>-->
+    <!--<bean id="polygonDao" class="cn.wmap.dao.PolygonDao">-->
+        <!--<property name="hibernateTemplate" ref="hibernateTemplate"></property>-->
+    <!--</bean>-->
 </beans>

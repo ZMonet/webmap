@@ -1,5 +1,6 @@
 package cn.wmap.action;
 
+import cn.common.action.GenericActionSupport;
 import cn.wmap.entity.PolygonWeb;
 import cn.wmap.service.PolygonService;
 import com.opensymphony.xwork2.ModelDriven;
@@ -10,39 +11,25 @@ import java.util.List;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
 
-public class RedrawAction implements ServletRequestAware, ModelDriven<PolygonWeb> {
+public class RedrawAction extends GenericActionSupport implements ServletRequestAware{
     private static final long serialVersionUID = 1L;
     private HttpServletRequest request;
     private String result;
+    private PolygonWeb polygonWeb;
     private PolygonService polygonService;
-    private JSONObject resultObj;
-    public String getResult() {
-        return result;
-    }
+
+
     public void setResult(String result) {
         this.result = result;
     }
-    public JSONObject getResultObj() {
-        return resultObj;
-    }
-    public void setResultObj(JSONObject resultObj) {
-        this.resultObj = resultObj;
-    }
-    //封装数据
-    private PolygonWeb polygonWeb = new PolygonWeb();
+
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;
     }
 
-
     public void setPolygonService(PolygonService polygonService) {
         this.polygonService = polygonService;
-    }
-
-    @Override
-    public PolygonWeb getModel() {
-        return this.polygonWeb;
     }
 
 

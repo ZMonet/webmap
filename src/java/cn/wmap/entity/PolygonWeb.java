@@ -14,6 +14,7 @@ public class PolygonWeb {
     private Integer updatetype;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pid")
     public int getPid() {
         return pid;
